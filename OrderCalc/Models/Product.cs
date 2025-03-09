@@ -8,7 +8,22 @@ namespace OrderCalc.Models
 {
     public class Product : IProduct
     {
-        public string Name { get; set; }
+        private string _name;
+        private decimal _price;
+        private int _quantity;
+
+        public string Name 
+        { get => _name;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value)) 
+                {
+                    throw new ArgumentException("Name cannot be empty.", nameof(value));
+                }
+
+                _name = value;
+            }
+        }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 

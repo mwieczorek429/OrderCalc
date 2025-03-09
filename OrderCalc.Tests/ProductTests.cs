@@ -26,6 +26,40 @@ namespace OrderCalc.Tests
             Assert.Equal(quantity, product.Quantity);
         }
 
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void Constructor_ShouldThrowArgumentException_WhenNameIsNullOrEmpty(string invalidName)
+        {
+            Assert.Throws<ArgumentException>(() => new Product(invalidName, 10.5m, 5));
+        }
+
+        [Fact]
+        public void Name_ShouldSetName_WithCorrectNameValue()
+        {
+            string name = "Apple";
+            decimal price = 10.5m;
+            int quantity = 3;
+
+            var product = new Product(name, price, quantity);
+
+            Assert.Equal(name, product.Name);
+        } 
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void Name_ShouldThrowArgumentException_WhenIsNullOrEmpty(string invalidName) 
+        {
+            var product = new Product("Apple", 10.5m, 5);
+
+            Action act = () => product.Name = invalidName;
+
+            Assert.Throws<ArgumentException>(act);
+        }
+
         [Fact]
         public void GetTotalPrice_WithPositivePriceAndQuantity_ReturnsCorrectTotal() 
         {
