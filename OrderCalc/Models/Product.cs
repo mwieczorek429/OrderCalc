@@ -21,7 +21,7 @@ namespace OrderCalc.Models
 
         public decimal GetTotalPrice()
         {
-            throw new NotImplementedException();
+            return Price * Quantity;
         }
     }
 }
